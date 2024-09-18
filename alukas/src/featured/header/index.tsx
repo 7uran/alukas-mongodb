@@ -8,6 +8,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { navbarItems } from '@/static/mockdb';
 import { LuPhone } from "react-icons/lu";
 import { MdOutlineLocationOn } from "react-icons/md";
+import Link from 'next/link';
 
 const Header = () => {
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -97,7 +98,7 @@ const Header = () => {
                             </button>
                             {
                                 isOpenDropdown &&
-                                <ul className={`text-sm w-[319px] bg-white ${isOpenDropdown ? "opacity-100" : "opacity-0"} transition duration-300 absolute z-[1] menu dropdown-content rounded-box  `}>
+                                <ul className={`text-sm w-[319px] bg-white ${isOpenDropdown ? "opacity-100" : "opacity-0"} transition duration-300 absolute z-[9999] menu dropdown-content rounded-box  `}>
                                     <li className='px-6 py-3 hover:bg-gray-100 transition cursor-pointer'>New Products</li>
                                     <li className='border-y px-6 py-3 hover:bg-gray-100 transition cursor-pointer'>Top On Sale</li>
                                     <li className='border-y px-6 py-3 hover:bg-gray-100 transition cursor-pointer'>Special Offer!</li>
@@ -113,13 +114,15 @@ const Header = () => {
                         <div className='flex gap-8'>
                             {
                                 navbarItems && navbarItems.map((item, index) => (
-                                    <div key={index} className='group flex items-center cursor-pointer text-sm'>
-                                        <p className='uppercase flex flex-col items-start font-medium'>
-                                            {item.label}
-                                            <span className='h-[3px] w-0 transition-all duration-300 group-hover:w-full bg-black'></span>
-                                        </p>
-                                        <IoIosArrowDown />
-                                    </div>
+                                    <Link key={index} href={item.href}>
+                                        <div className='group flex items-center cursor-pointer text-sm'>
+                                            <p className='uppercase flex flex-col items-start font-medium'>
+                                                {item.label}
+                                                <span className='h-[3px] w-0 transition-all duration-300 group-hover:w-full bg-black'></span>
+                                            </p>
+                                            <IoIosArrowDown />
+                                        </div>
+                                    </Link>
                                 ))
                             }
 
