@@ -70,3 +70,23 @@ export const slides = [
 
 
 ];
+
+
+
+export const shopCards = [
+    {
+        image: 'https://demo-alukas.myshopify.com/cdn/shop/files/alk1_1.webp?v=1712128482&width=436',
+        title: 'Just Lunched <br/> Desk The Hals',
+        headTitle: '2024 fashion'
+    },
+    {
+        image: 'https://demo-alukas.myshopify.com/cdn/shop/files/alk1_2.jpg?v=1711684410&width=436',
+        title: 'Just Lunched <br/> Desk The Hals',
+        headTitle: '2024 fashion'
+    },
+    {
+        image: '',
+        title: 'Just Lunched <br/> Desk The Hals',
+        headTitle: '2024 fashion'
+    },
+]
