@@ -7,13 +7,14 @@ import GoUpButton from '@/components/GoUpButton';
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const pathname = usePathname();
     const isAdminPage = pathname.startsWith('/admin');
-
+    const loginPage = pathname.startsWith('/login');
+    const registerPage = pathname.startsWith('/register');
     return (
         <main>
-            {!isAdminPage && <Header />}
+            {!isAdminPage && !loginPage && !registerPage && <Header />}
             {children}
-            {!isAdminPage && <Footer />}
-            {!isAdminPage && <GoUpButton />}
+            {!isAdminPage && !loginPage && !registerPage && <Footer />}
+            {!isAdminPage && !loginPage && !registerPage && <GoUpButton />}
         </main>
     );
 };

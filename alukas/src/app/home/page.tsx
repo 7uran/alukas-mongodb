@@ -1,3 +1,4 @@
+import CollectionCard from "@/components/CollectionCard";
 import Line from "@/components/Line";
 import PopularCategroyCard from "@/components/PopularCategoryCard";
 import ShopCard from "@/components/ShopCard";
@@ -47,7 +48,7 @@ export default function HomePage() {
                         <Line />
                     </div>
                     <div className="text-[20px] flex justify-center w-full">
-                        <h2>Collect your loves with our autumn arrivals.</h2>
+                        <h2>Collect your loves with our newest arrivals.</h2>
                     </div>
                     <div className="flex w-full justify-between py-10">
                         <TrendyCollectionCard />
@@ -63,6 +64,46 @@ export default function HomePage() {
                     <SlHome />
                     <p>Find Shops Near You</p>
                     <button className="capitalize text-[18px] border-black border-2 px-6 py-1">find store</button>
+                </div>
+            </section>
+            <section>
+                <div className="max-w-[1360px] w-full mx-auto py-10 flex justify-between flex-wrap">
+                    <div className="w-full flex gap-3 justify-center text-[40px] items-center mt-10">
+                        <Line />
+                        <h1>Autmn Collection</h1>
+                        <Line />
+                    </div>
+
+                    <div className="text-[20px] flex justify-center w-full">
+                        <h2>Collect your loves with our autumn arrivals.</h2>
+                    </div>
+                    <div className="flex w-full justify-between py-10">
+                        <TrendyCollectionCard />
+                        <TrendyCollectionCard />
+                        <TrendyCollectionCard />
+                        <TrendyCollectionCard />
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div className="max-w-[1360px] w-full mx-auto py-10 flex justify-between flex-wrap">
+                    <CollectionCard />
+                    <CollectionCard />
+                </div>
+            </section>
+            <section>
+                <div className="max-w-[1360px] w-full mx-auto py-10 flex justify-between flex-wrap">
+                    <div className="w-full flex gap-3 justify-center text-[40px] items-center mt-10">
+                        <Line />
+                        <h1>Featured Products</h1>
+                        <Line />
+                    </div>
+                    <div className="flex w-full justify-between py-10">
+                        <TrendyCollectionCard />
+                        <TrendyCollectionCard />
+                        <TrendyCollectionCard />
+                        <TrendyCollectionCard />
+                    </div>
                 </div>
             </section>
         </div>
