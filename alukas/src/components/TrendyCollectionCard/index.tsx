@@ -33,7 +33,7 @@ const TrendyCollectionCard: React.FC<TrendyCollectionCardProps> = ({ title, pric
                 <p className='text-[18px]'>
                     {title}
                 </p>
-                <Link href={`/home/product/${slug}`}>
+                <Link href={`/home/products?id=${slug}`}>
                     <button className=' h-[28px] group/item overflow-hidden'>
                         <div className='text-[18px] group-hover:-translate-y-[28px]  transition duration-300 '>
                             <p>${price}.00</p>
