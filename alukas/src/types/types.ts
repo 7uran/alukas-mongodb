@@ -62,3 +62,7 @@ export interface Card {
     cardType: string;
     slug: string;
 }
+
+export type ImageData = {
+    src: string;
+};

@@ -8,9 +8,11 @@ import Spinner from "@/components/Spinner";
 import TrendyCollectionCard from "@/components/TrendyCollectionCard";
 import { CollectionCards, PopularCategoryCards, shopCards } from "@/static/mockdb";
 import { Card } from "@/types/types";
-import Image from "next/image";
+import CommentCard from "../../components/CommentCard";
 import { useEffect, useState } from "react";
 import { SlHome } from "react-icons/sl";
+import ReadJournalCard from "@/components/ReadJournalCard";
+import FollowUs from "@/components/FollowUs";
 
 export default function HomePage() {
     const BASE_URL = "http://localhost:3001/api/v1/cards"
@@ -185,13 +187,36 @@ export default function HomePage() {
             </section>
             <section>
                 <div className="bg-[#EDE2E1] bg-cover bg-center" style={{ backgroundImage: "url('https://demo-alukas.myshopify.com/cdn/shop/files/alk_bg_testi.jpg?v=1711954099')" }}>
-                    <div className="max-w-[1360px] w-full mx-auto flex justify-between flex-wrap relative">
-                        <div className="w-full flex gap-3 justify-center text-[40px] items-center mt-10">
+                    <div className="max-w-[1360px] w-full mx-auto pb-20 flex justify-between gap-10 flex-wrap relative">
+                        <div className="w-full flex gap-3 justify-center text-[40px] items-center pt-20">
                             <h1>Customer Review</h1>
+                        </div>
+                        <div className="flex  justify-between w-full ">
+                            <CommentCard />
+                            <CommentCard />
+                            <CommentCard />
                         </div>
                     </div>
                 </div>
 
+            </section >
+            <section>
+                <div className="w-full flex gap-3 justify-center text-[40px] items-center mt-10 flex-col">
+
+                    <h1>Read Journal</h1>
+                    <p className="text-[20px]">Latest trends and inspirations in fashion design.</p>
+                </div>
+                <div className="max-w-[1360px] w-full mx-auto pt-10 pb-32 flex justify-between">
+                    <ReadJournalCard image="https://demo-alukas.myshopify.com/cdn/shop/articles/3.jpg?v=1711695248&width=533" date="Mar 06 2024" desc="Selective Styles Help your look" />
+                    <ReadJournalCard image="https://demo-alukas.myshopify.com/cdn/shop/articles/2.jpg?v=1711695314&width=533" date="Mar 06 2024" desc="How to Style a Quiff" />
+                    <ReadJournalCard image="https://demo-alukas.myshopify.com/cdn/shop/articles/1.jpg?v=1711695328&width=533" date="Mar 06 2024" desc="Christmas Gift Guide" />
+                </div>
+            </section>
+
+            <section>
+                <div className="max-w-[1360px] w-full mx-auto pt-10 pb-32 flex items-center justify-center ">
+                    <FollowUs />
+                </div>
             </section >
         </div >
     )

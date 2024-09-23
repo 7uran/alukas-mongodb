@@ -1,3 +1,5 @@
+import { ImageData } from "@/types/types";
+
 export const navbarItems = [
     {
         label: "home",
@@ -23,6 +25,27 @@ export const navbarItems = [
         href: '/#'
     },
 ]
+
+export const images: ImageData[] = [
+    {
+        src: "https://demo-alukas.myshopify.com/cdn/shop/files/alk_i1.jpg?v=1711684513",
+    },
+    {
+        src: "https://demo-alukas.myshopify.com/cdn/shop/files/alk_i2.jpg?v=1711684513",
+    },
+    {
+        src: "https://demo-alukas.myshopify.com/cdn/shop/files/alk_i3.jpg?v=1711684513",
+    },
+    {
+        src: "https://demo-alukas.myshopify.com/cdn/shop/files/alk_i4.jpg?v=1711684513",
+    },
+    {
+        src: "https://demo-alukas.myshopify.com/cdn/shop/files/alk_i5.jpg?v=1711684513",
+    },
+    {
+        src: "https://demo-alukas.myshopify.com/cdn/shop/files/alk_i6.jpg?v=1711684513",
+    },
+];
 
 
 export const features = [
