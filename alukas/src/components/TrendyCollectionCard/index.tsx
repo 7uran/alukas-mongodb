@@ -3,15 +3,17 @@ import React from 'react'
 import { IoHeartOutline } from "react-icons/io5";
 import { SlRefresh } from "react-icons/sl";
 import { IoSearchOutline } from "react-icons/io5";
+import Link from 'next/link';
+import { TrendyCollectionCardProps } from '@/types/types';
 
-const TrendyCollectionCard = () => {
+const TrendyCollectionCard: React.FC<TrendyCollectionCardProps> = ({ title, price, image, image2, slug }) => {
     return (
-        <div className='group'>
+        <div className='group cursor-pointer'>
             <div className='overflow-hidden relative '>
                 <div className='relative w-[320px] h-[320px]'>
-                    <Image width={320} height={320} alt="" src={"https://demo-alukas.myshopify.com/cdn/shop/files/2.jpg?v=1709714257&width=533"}
+                    <Image width={320} height={320} alt="" src={image2}
                         className='object-cover  group-hover:scale-110 transition duration-500 ' />
-                    <Image width={320} height={320} alt="" src={"https://demo-alukas.myshopify.com/cdn/shop/files/1.jpg?v=1709714257&width=533"}
+                    <Image width={320} height={320} alt="" src={image}
                         className='object-cover  group-hover:scale-110 transition duration-500 group-hover:opacity-0 absolute top-0 ' />
                 </div>
                 <div className='absolute flex flex-col gap-2 top-2 right-0 opacity-0 group-hover:opacity-100 transition duration-500 z-[1] group-hover:-translate-x-[10px]'>
@@ -29,22 +31,24 @@ const TrendyCollectionCard = () => {
             <div className='flex justify-center flex-col items-center'>
                 <p className='text-[14px] uppercase text-gray-400'>Alukas</p>
                 <p className='text-[18px]'>
-                    Circle of Light Heart Earrings
+                    {title}
                 </p>
-                <button className=' h-[28px] group/item overflow-hidden'>
-                    <div className='text-[18px] group-hover:-translate-y-[28px]  transition duration-300 '>
-                        <p>$129.00</p>
-                        <div className='w-fit cursor-pointer  overflow-hidden'>
-                            <a className='text-lg relative uppercase'>
-                                Shop Now
-                                <span className='block h-[2px] w-full transition-all duration-300 group-hover/item:translate-x-full bg-black'></span>
-                            </a>
+                <Link href={`/home/product/${slug}`}>
+                    <button className=' h-[28px] group/item overflow-hidden'>
+                        <div className='text-[18px] group-hover:-translate-y-[28px]  transition duration-300 '>
+                            <p>${price}.00</p>
+                            <div className='w-fit cursor-pointer  overflow-hidden'>
+                                <span className='text-lg relative uppercase'>
+                                    Shop Now
+                                    <span className='block h-[2px] w-full transition-all duration-300 group-hover/item:translate-x-full bg-black'></span>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                </button>
+                    </button>
+                </Link>
             </div>
         </div>
     )
 }
 
-export default TrendyCollectionCard
+export default TrendyCollectionCard;

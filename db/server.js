@@ -5,6 +5,7 @@ const cors = require("cors");
 const connectDB = require("./db/dbserver");
 const authRouters = require("./routers/AuthRouter");
 const blogRouter = require("./routers/routers")
+const cardRouter = require("./routers/CardRouter");
 const path = require("path");
 
 app.use(express.json());
@@ -20,6 +21,7 @@ connectDB();
 const PORT = process.env.PORT || 8080;
 
 app.use("/api/v1/data", blogRouter);
+app.use("/api/v1/cards", cardRouter);
 app.use("/api/v1/auth", authRouters);
 
 app.listen(PORT, () => {

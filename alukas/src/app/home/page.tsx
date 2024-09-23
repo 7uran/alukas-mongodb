@@ -1,12 +1,52 @@
+"use client"
 import CollectionCard from "@/components/CollectionCard";
 import Line from "@/components/Line";
 import PopularCategroyCard from "@/components/PopularCategoryCard";
 import ShopCard from "@/components/ShopCard";
 import Slider from "@/components/Slider";
+import Spinner from "@/components/Spinner";
 import TrendyCollectionCard from "@/components/TrendyCollectionCard";
+import { CollectionCards, PopularCategoryCards, shopCards } from "@/static/mockdb";
+import { Card } from "@/types/types";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { SlHome } from "react-icons/sl";
 
 export default function HomePage() {
+    const BASE_URL = "http://localhost:3001/api/v1/cards"
+    const [trendyCards, setTrendyCards] = useState<Card[]>([]);
+    const [autmnCards, setAutmnCards] = useState<Card[]>([]);
+    const [featuredCards, setFeaturedCards] = useState<Card[]>([]);
+
+    const fetchCards = async () => {
+        try {
+            const response = await fetch(BASE_URL, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                const cards: Card[] = result.cards;
+                const trendyCards = cards.filter((card) => card.cardType === "trendy");
+                const featuredCards = cards.filter((card) => card.cardType === "featured");
+                const autmnCards = cards.filter((card) => card.cardType === "autmn");
+                setFeaturedCards(featuredCards);
+                setTrendyCards(trendyCards);
+                setAutmnCards(autmnCards);
+            } else {
+                console.error("Failed to fetch cards:", response.statusText);
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchCards();
+    }, []);
 
     return (
         <div>
@@ -15,9 +55,9 @@ export default function HomePage() {
             </section>
             <section>
                 <div className="max-w-[1360px] w-full mx-auto py-10 flex justify-between flex-wrap">
-                    <ShopCard />
-                    <ShopCard />
-                    <ShopCard />
+                    {shopCards.map((item, index) => (
+                        <ShopCard key={index} title={item.headTitle} desc={item.title} img={item.image} />
+                    ))}
                 </div>
             </section>
             <section>
@@ -28,16 +68,14 @@ export default function HomePage() {
                         </h1>
                     </div>
                     <div className="flex justify-between w-full py-10">
-                        <PopularCategroyCard />
-                        <PopularCategroyCard />
-                        <PopularCategroyCard />
-                        <PopularCategroyCard />
-                        <PopularCategroyCard />
-                        <PopularCategroyCard />
+                        {
+                            PopularCategoryCards.map((item, index) => (
+                                <PopularCategroyCard key={index} img={item.image} title={item.title} />
+                            ))
+                        }
                     </div>
-                    <div>
 
-                    </div>
+
                 </div>
             </section>
             <section>
@@ -50,12 +88,23 @@ export default function HomePage() {
                     <div className="text-[20px] flex justify-center w-full">
                         <h2>Collect your loves with our newest arrivals.</h2>
                     </div>
-                    <div className="flex w-full justify-between py-10">
-                        <TrendyCollectionCard />
-                        <TrendyCollectionCard />
-                        <TrendyCollectionCard />
-                        <TrendyCollectionCard />
-
+                    <div className="flex w-full justify-around py-10">
+                        {trendyCards.length > 0 ? (
+                            trendyCards.map((card) => (
+                                <TrendyCollectionCard
+                                    key={card._id}
+                                    title={card.title}
+                                    price={card.price}
+                                    image={`http://localhost:3001${card.image}`}
+                                    image2={`http://localhost:3001${card.image2}`}
+                                    slug={card._id}
+                                />
+                            ))
+                        ) : (
+                            <div className="flex justify-center items-center w-full min-h-64">
+                                <Spinner />
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
@@ -77,18 +126,34 @@ export default function HomePage() {
                     <div className="text-[20px] flex justify-center w-full">
                         <h2>Collect your loves with our autumn arrivals.</h2>
                     </div>
-                    <div className="flex w-full justify-between py-10">
-                        <TrendyCollectionCard />
-                        <TrendyCollectionCard />
-                        <TrendyCollectionCard />
-                        <TrendyCollectionCard />
+                    <div className="flex w-full justify-around py-10">
+                        {autmnCards.length > 0 ? (
+                            autmnCards.map((card) => (
+                                <TrendyCollectionCard
+                                    key={card._id}
+                                    title={card.title}
+                                    price={card.price}
+                                    image={`http://localhost:3001${card.image}`}
+                                    image2={`http://localhost:3001${card.image2}`}
+                                    slug={card._id}
+                                />
+                            ))
+                        ) : (
+                            <div className="flex justify-center items-center w-full min-h-64">
+                                <Spinner />
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
             <section>
                 <div className="max-w-[1360px] w-full mx-auto py-10 flex justify-between flex-wrap">
-                    <CollectionCard />
-                    <CollectionCard />
+                    {
+                        CollectionCards.map((item, index) => (
+                            <CollectionCard key={index} img={item.img} title={item.title} desc={item.desc} />
+                        ))
+                    }
+
                 </div>
             </section>
             <section>
@@ -98,14 +163,36 @@ export default function HomePage() {
                         <h1>Featured Products</h1>
                         <Line />
                     </div>
-                    <div className="flex w-full justify-between py-10">
-                        <TrendyCollectionCard />
-                        <TrendyCollectionCard />
-                        <TrendyCollectionCard />
-                        <TrendyCollectionCard />
+                    <div className="flex w-full justify-around py-10">
+                        {featuredCards.length > 0 ? (
+                            featuredCards.map((card) => (
+                                <TrendyCollectionCard
+                                    key={card._id}
+                                    title={card.title}
+                                    price={card.price}
+                                    image={`http://localhost:3001${card.image}`}
+                                    image2={`http://localhost:3001${card.image2}`}
+                                    slug={card._id}
+                                />
+                            ))
+                        ) : (
+                            <div className="flex justify-center items-center w-full min-h-64">
+                                <Spinner />
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
-        </div>
+            <section>
+                <div className="bg-[#EDE2E1] bg-cover bg-center" style={{ backgroundImage: "url('https://demo-alukas.myshopify.com/cdn/shop/files/alk_bg_testi.jpg?v=1711954099')" }}>
+                    <div className="max-w-[1360px] w-full mx-auto flex justify-between flex-wrap relative">
+                        <div className="w-full flex gap-3 justify-center text-[40px] items-center mt-10">
+                            <h1>Customer Review</h1>
+                        </div>
+                    </div>
+                </div>
+
+            </section >
+        </div >
     )
 }
