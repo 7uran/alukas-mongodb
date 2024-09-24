@@ -76,8 +76,6 @@ export default function HomePage() {
                             ))
                         }
                     </div>
-
-
                 </div>
             </section>
             <section>
