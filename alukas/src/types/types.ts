@@ -82,3 +82,7 @@ export type ImageData = {
     src: string;
 };
 
+export interface AccordionItemProps {
+    title: string;
+    content: React.ReactNode;
+}

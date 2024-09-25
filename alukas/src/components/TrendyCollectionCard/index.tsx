@@ -5,11 +5,13 @@ import { SlRefresh } from "react-icons/sl";
 import { IoSearchOutline } from "react-icons/io5";
 import Link from 'next/link';
 import { TrendyCollectionCardProps } from '@/types/types';
+import { usePathname } from 'next/navigation';
 
 const TrendyCollectionCard: React.FC<TrendyCollectionCardProps> = ({ title, price, image, image2, slug }) => {
+    const currentPath = usePathname();
     return (
         <div className='group cursor-pointer'>
-            <Link href={`/home/products?id=${slug}`}>
+            <Link href={`${currentPath}/products?id=${slug}`}>
                 <div className='overflow-hidden relative '>
                     <div className='relative w-[320px] h-[320px]'>
                         <Image width={320} height={320} alt="" src={image2}
