@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { TbEyeClosed } from "react-icons/tb";
-import { FaEye } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 export default function RegisterPage() {
@@ -20,10 +18,7 @@ export default function RegisterPage() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
-            return;
-        }
+      
 
         try {
             const response = await fetch("http://localhost:3001/api/v1/auth/register", {
@@ -37,16 +32,16 @@ export default function RegisterPage() {
             console.log(response);
 
             if (response.ok) {
-                console.log("Registration successful");
+               
                 toast.success("Registration successful")
                 router.push("/");
             } else {
-                console.error("Registration failed:", response.statusText);
-                alert("Registration failed");
+           
+                toast.error("Registration failed");
             }
         } catch (error) {
-            console.error("An error occurred:", error);
-            alert("An error occurred. Please try again.");
+           
+            toast.error("An error occurred. Please try again.");
         }
     };
 
@@ -56,6 +51,7 @@ export default function RegisterPage() {
                 <h2 className="text-2xl font-medium pt-[30px] text-gray-900 text-center">
                     Create Account
                 </h2>
+                <p className="text-xl">Join to Us!</p>
                 <form
                     onSubmit={handleSubmit}
                     className="w-full pt-[46px] pb-[54px] px-[54px] bg-white"
@@ -112,6 +108,7 @@ export default function RegisterPage() {
                         <button
                             onClick={togglePasswordVisibility}
                             className="select-none absolute pr-[10px] right-[10px] top-[50%] transform -translate-y-[50%] cursor-pointer"
+                            type="button"
                         >
                             {showPassword ? "🙉" : "🙈"}
                         </button>

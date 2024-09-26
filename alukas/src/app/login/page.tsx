@@ -32,19 +32,15 @@ export default function LoginPage() {
                 const data = await response.json();
                 const token = data.token;
 
-               
-                Cookies.set('token', token, { expires: 7 });
 
-                console.log("Login successful");
+                Cookies.set('token', token, { expires: 7 });
                 toast.success("Login successful");
                 router.push("/");
             } else {
-                console.error("Login failed:", response.statusText);
-                alert("Login failed");
+                toast.error("Email or password incorrect")
             }
         } catch (error) {
-            console.error("An error occurred:", error);
-            alert("An error occurred. Please try again.");
+            toast.error("An error occurred. Please try again.");
         }
     };
 
@@ -58,6 +54,7 @@ export default function LoginPage() {
                 <h2 className="text-2xl font-medium pt-[30px] text-gray-900 text-center">
                     Login
                 </h2>
+                <p className="text-xl">Welcome to Alukas!</p>
                 <form
                     onSubmit={handleSubmit}
                     className="w-full pt-[46px] pb-[20px] px-[54px] bg-white"
