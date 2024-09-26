@@ -12,9 +12,19 @@ export default function ShopPage() {
     const BASE_URL = "http://localhost:3001/api/v1/shop-cards";
     const [cards, setCards] = useState<Card[]>([]);
 
+    // State for filters
+    const [selectedMaterials, setSelectedMaterials] = useState<string[]>([]);
+
     const fetchCards = async () => {
         try {
-            const response = await fetch(BASE_URL, {
+            // Building query params for filters
+            const queryParams = new URLSearchParams();
+
+            if (selectedMaterials.length > 0) {
+                queryParams.append("materials", selectedMaterials.join(","));
+            }
+
+            const response = await fetch(`${BASE_URL}?${queryParams.toString()}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -35,7 +45,7 @@ export default function ShopPage() {
 
     useEffect(() => {
         fetchCards();
-    }, []);
+    }, [selectedMaterials]);
 
     return (
         <div>
@@ -87,9 +97,23 @@ export default function ShopPage() {
                                 title="Material"
                                 content={
                                     <div className="flex flex-col justify-center gap-2">
-                                        <div className="flex items-center gap-2"><input className="w-[17px] h-[17px]" type="checkbox" /><label>Bronze</label></div>
-                                        <div className="flex items-center gap-2"><input className="w-[17px] h-[17px]" type="checkbox" /><label>Gold</label></div>
-                                        <div className="flex items-center gap-2"><input className="w-[17px] h-[17px]" type="checkbox" /><label>Silver</label></div>
+                                        {["Bronze", "Gold", "Silver"].map((material) => (
+                                            <div className="flex items-center gap-2" key={material}>
+                                                <input
+                                                    className="w-[17px] h-[17px]"
+                                                    type="checkbox"
+                                                    checked={selectedMaterials.includes(material)}
+                                                    onChange={() => {
+                                                        setSelectedMaterials((prev) =>
+                                                            prev.includes(material)
+                                                                ? prev.filter((item) => item !== material)
+                                                                : [...prev, material]
+                                                        );
+                                                    }}
+                                                />
+                                                <label>{material}</label>
+                                            </div>
+                                        ))}
                                     </div>
                                 }
                             />

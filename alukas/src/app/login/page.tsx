@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
 import React from "react";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -28,12 +28,15 @@ export default function LoginPage() {
                 credentials: "include",
             });
 
-            console.log(email)
-            console.log(password)
-
             if (response.ok) {
+                const data = await response.json();
+                const token = data.token;
+
+               
+                Cookies.set('token', token, { expires: 7 });
+
                 console.log("Login successful");
-                toast.success("Registration successful")
+                toast.success("Login successful");
                 router.push("/");
             } else {
                 console.error("Login failed:", response.statusText);
@@ -66,7 +69,7 @@ export default function LoginPage() {
                             value={email}
                             placeholder="Your email*"
                             onChange={(e) => setEmail(e.target.value)}
-                            className="block text-[16px] w-full px-[20px] py-[10px] border border-gray-300 placeholder-[#555555]  focus:outline-none focus:ring-0 focus:border-black transition-colors duration-300 ease-in-out"
+                            className="block text-[16px] w-full px-[20px] py-[10px] border border-gray-300 placeholder-[#555555] focus:outline-none focus:ring-0 focus:border-black transition-colors duration-300 ease-in-out"
                             required
                         />
                     </div>
@@ -90,10 +93,9 @@ export default function LoginPage() {
                     </div>
                     <button
                         type="submit"
-                        className="w-full py-[10px] px-[45px] bg-[#222222] text-[18px] text-white focus:outline-none transition-colors duration-300 ease-in-out ">
-                            Log in
-                   </button>
-                       
+                        className="w-full py-[10px] px-[45px] bg-[#222222] text-[18px] text-white focus:outline-none transition-colors duration-300 ease-in-out">
+                        Log in
+                    </button>
                 </form>
 
                 <div className="flex flex-col gap-[20px] w-full px-[54px] pb-[50px]">

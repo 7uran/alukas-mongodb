@@ -34,7 +34,7 @@ const AuthLogin = async (req, res) => {
         .json({ message: "username and password is Wrong" });
     }
     const isMatch = await bcyrpt.compare(password, user?.password);
-    console.log(isMatch,'isMatch')
+   
     if (!isMatch) {
       return res
         .status(400)
