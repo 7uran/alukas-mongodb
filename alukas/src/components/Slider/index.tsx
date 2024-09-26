@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { slides } from '../../static/mockdb';
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
+import Link from 'next/link';
 
 const Slider = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,9 +29,9 @@ const Slider = () => {
                         <h2 className="py-6 text-[24px] text-[rgb(85, 85, 85)]">
                             {slide.desc}
                         </h2>
-                        <button className="border-2 bg-transparent hover:bg-black  border-black text-black px-10 py-3 hover:bg-main transition hover:text-white">
+                        <Link href={"/shop"} className="border-2 bg-transparent hover:bg-black  border-black text-black px-10 py-3 hover:bg-main transition hover:text-white">
                             SHOP NOW
-                        </button>
+                        </Link>
                     </div>
 
                     <img

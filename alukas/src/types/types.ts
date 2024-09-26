@@ -86,3 +86,8 @@ export interface AccordionItemProps {
     title: string;
     content: React.ReactNode;
 }
+
+export interface LoginModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}

@@ -9,10 +9,17 @@ import { navbarItems } from '@/static/mockdb';
 import { LuPhone } from "react-icons/lu";
 import { MdOutlineLocationOn } from "react-icons/md";
 import Link from 'next/link';
+import LoginModal from '@/components/LoginModal';
 
 const Header = () => {
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleLogout = () => {
+        localStorage.removeItem('authToken'); 
+        window.location.reload(); 
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -71,8 +78,8 @@ const Header = () => {
                 </div>
                 <div className='hidden md:flex text-3xl gap-4'>
                     <div className='relative group'>
-                        <CiUser />
-                        <span className='absolute left-1/2 transform -translate-x-1/2  w-16 flex items-center justify-center opacity-0 group-hover:opacity-100 transition bg-black text-white text-sm rounded-sm py-1 px-2'>Log in</span>
+                        <CiUser onClick={() => setIsModalOpen(true)} />
+                        <span className='absolute left-1/2 transform -translate-x-1/2 w-16 flex items-center justify-center opacity-0 group-hover:opacity-100 transition bg-black text-white text-sm rounded-sm py-1 px-2'>Log in</span>
                     </div>
                     <div className='relative group w-9'>
                         <CiHeart />
@@ -142,6 +149,7 @@ const Header = () => {
 
                 </div>
             </div>
+            <LoginModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </header>
     )
 }
