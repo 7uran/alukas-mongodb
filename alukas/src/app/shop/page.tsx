@@ -1,4 +1,5 @@
 "use client";
+import CreateCardModal from "@/components/CreateCardModal";
 import PopularCategroyCard from "@/components/PopularCategoryCard";
 import PriceRangeSlider from "@/components/PriceRangeSlider";
 import TrendyCollectionCard from "@/components/TrendyCollectionCard";
@@ -11,13 +12,37 @@ import AccordionItem from "../../components/AccardionItem";
 export default function ShopPage() {
     const BASE_URL = "http://localhost:3001/api/v1/shop-cards";
     const [cards, setCards] = useState<Card[]>([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // State for filters
+
     const [selectedMaterials, setSelectedMaterials] = useState<string[]>([]);
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    };
 
+    const handleSaveCard = async (newCard: Card) => {
+        try {
+            const response = await fetch("http://localhost:3001/api/v1/shop-cards", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newCard),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                setCards([...cards, result.card]);
+            } else {
+                console.error("Failed to create card:", response.statusText);
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+    };
     const fetchCards = async () => {
         try {
-            // Building query params for filters
+
             const queryParams = new URLSearchParams();
 
             if (selectedMaterials.length > 0) {
@@ -49,6 +74,7 @@ export default function ShopPage() {
 
     return (
         <div>
+
             <div>
                 <div className="relative flex justify-center items-center w-full h-[300px]">
                     <Image
@@ -74,7 +100,18 @@ export default function ShopPage() {
                     </div>
                 </section>
                 <section>
+                    <div className="flex  justify-end">
+                        <button onClick={toggleModal} className="border py-2 px-4 hover:bg-black transition hover:text-white rounded-sm">Create New Card</button>
+
+                        <CreateCardModal
+                            isOpen={isModalOpen}
+                            onClose={toggleModal}
+                            onSave={handleSaveCard}
+                        />
+                    </div>
+
                     <div className="flex justify-between w-full gap-12">
+
                         <div className="w-[270px]">
                             <AccordionItem
                                 title="Collections"
@@ -155,7 +192,9 @@ export default function ShopPage() {
                                 <Image width={270} height={300} alt="" src={"https://demo-alukas.myshopify.com/cdn/shop/files/banner-shop.jpg?v=1711798181&width=1500"} />
                             </div>
                         </div>
-                        <div className="flex justify-between py-10 w-full">
+
+                        <div className="flex justify-between py-10 w-full flex-wrap">
+
                             {cards.map((card) => (
                                 <TrendyCollectionCard
                                     key={card._id}

@@ -9,7 +9,7 @@ import { navbarItems } from '@/static/mockdb';
 import { LuPhone } from "react-icons/lu";
 import { MdOutlineLocationOn } from "react-icons/md";
 import Link from 'next/link';
-import LoginModal from '@/components/LoginModal';
+import LoginModal from '@/components/LogoutModal';
 
 const Header = () => {
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);

@@ -30,7 +30,7 @@ const createCard = async (req, res) => {
     try {
         const { title, price, features } = req.body;
 
-        // Destructure features to get individual values
+     
         const { size, color, material } = features || {};
 
         if (!size || !color || !material) {

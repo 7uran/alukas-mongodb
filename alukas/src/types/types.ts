@@ -91,3 +91,10 @@ export interface LoginModalProps {
     isOpen: boolean;
     onClose: () => void;
 }
+
+
+export interface CreateCardModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSave: (newCard: Card) => void;
+}
